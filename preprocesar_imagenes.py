@@ -2,10 +2,20 @@ import os
 import time
 from os import system
 from PIL import Image
-from predict_pose import generate_pose_keypoints
+from ACGPN.predict_pose import generate_pose_keypoints
 #from ACGPN.U-2-Net import u2net_load, u2net_run
+
+def dirParent():
+    separador = os.path.sep
+    dir_actual = os.path.dirname(os.path.abspath(__file__))
+    dir = separador.join(dir_actual.split(separador)[:-1])
+    os.chdir(dir)
+
+
+dirParent()
+
 cwd = os.getcwd()
-os.chdir(os.getcwd() + '/U-2-Net/')
+os.chdir(os.getcwd() + '/ACGPN/U-2-Net/')
 import u2net_load
 import u2net_run
 os.chdir(cwd)
@@ -14,7 +24,7 @@ os.getcwd()
 
 def obtener_u2net():
     cwd = os.getcwd()
-    os.chdir(os.getcwd() + '/U-2-Net/')
+    os.chdir(os.getcwd() + '/ACGPN/U-2-Net/')
     u2net = u2net_load.model(model_name = 'u2netp')
     os.chdir(cwd)
     os.getcwd()
@@ -75,6 +85,13 @@ def preprocesar_img_user():
         print('Parsing generated for image {} in {}s'.format(new_img_name, time.time()-start_time))
 
         pose_path = os.path.join('/content/ACGPN/Data_preprocessing/test_pose', new_img_name.replace('.png', '_keypoints.json'))
+        
         generate_pose_keypoints(img_path, pose_path)
 
         print('Pose map generated for image {} in {}s'.format(new_img_name, time.time()-start_time))
+
+def generar_test_pair_txt():
+  ruta_archivo = '/content/ACGPN/Data_preprocessing/test_pairs.txt'
+  system('rm -rf ' + ruta_archivo)
+  with open(ruta_archivo,'w') as f:
+    f.write('000001_0.png 000001_1.png')
