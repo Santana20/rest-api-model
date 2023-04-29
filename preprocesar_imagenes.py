@@ -80,7 +80,11 @@ def preprocesar_img_user():
     
         #!python /content/ACGPN/Self-Correction-Human-Parsing-for-ACGPN/simple_extractor.py --dataset 'lip' --model-restore 'lip_final.pth' --input-dir '/content/ACGPN/Data_preprocessing/test_img' --output-dir '/content/ACGPN/Data_preprocessing/test_label'
 
+        cwd = os.getcwd()
+        os.chdir(os.getcwd() + '/ACGPN/')
         system("python /content/ACGPN/Self-Correction-Human-Parsing-for-ACGPN/simple_extractor.py --dataset 'lip' --model-restore 'lip_final.pth' --input-dir '/content/ACGPN/Data_preprocessing/test_img' --output-dir '/content/ACGPN/Data_preprocessing/test_label'")
+        os.chdir(cwd)
+        os.getcwd()
 
         print('Parsing generated for image {} in {}s'.format(new_img_name, time.time()-start_time))
 
