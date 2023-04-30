@@ -2,8 +2,10 @@ from flask import Flask, jsonify, request
 from cloth import *
 from descargar_imagen import descargar_img
 from generar_tryon import generar_tryon
+from flask_ngrok import run_with_ngrok
 
 app  = Flask(__name__)
+run_with_ngrok(app)
 
 CLOTH_DIR = 'img/cloth/'
 IMG_USER_DIR = 'img/user/'
@@ -27,4 +29,4 @@ def tryOn():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=4000)
+    app.run()
