@@ -99,3 +99,10 @@ def generar_test_pair_txt():
   system('rm -rf ' + ruta_archivo)
   with open(ruta_archivo,'w') as f:
     f.write('000001_0.png 000001_1.png')
+
+def correr_test_tryon():
+    cwd = os.getcwd()
+    os.chdir(os.getcwd() + '/ACGPN/')
+    system("python test.py")
+    os.chdir(cwd)
+    os.getcwd()
