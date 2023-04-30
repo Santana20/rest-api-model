@@ -1,6 +1,8 @@
 from flask import Flask, jsonify, request
 from cloth import *
 from descargar_imagen import descargar_img
+from generar_tryon import generar_tryon
+
 app  = Flask(__name__)
 
 CLOTH_DIR = 'img/cloth/'
@@ -19,6 +21,8 @@ def tryOn():
     # guardamos la imagen de la persona
     descargar_img(request_data['user']['url'], IMG_USER_DIR)
 
+    # ejecutamos el test
+    generar_tryon()    
     return request_data
 
 
