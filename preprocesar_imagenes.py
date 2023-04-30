@@ -2,7 +2,6 @@ import os
 import time
 from os import system
 from PIL import Image
-from ACGPN.predict_pose import generate_pose_keypoints
 #from ACGPN.U-2-Net import u2net_load, u2net_run
 
 def dirParent():
@@ -13,6 +12,7 @@ def dirParent():
 
 
 dirParent()
+from ACGPN.predict_pose import generate_pose_keypoints
 
 cwd = os.getcwd()
 os.chdir(os.getcwd() + '/ACGPN/U-2-Net/')
