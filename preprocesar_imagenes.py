@@ -9,23 +9,31 @@ def dirParent():
     dir_actual = os.path.dirname(os.path.abspath(__file__))
     dir = separador.join(dir_actual.split(separador)[:-1])
     os.chdir(dir)
-
+    print('estamos en:', os.getcwd())
 
 dirParent()
-from ACGPN.predict_pose import generate_pose_keypoints
+
 
 cwd = os.getcwd()
 os.chdir(os.getcwd() + '/ACGPN/U-2-Net/')
-import u2net_load
-import u2net_run
+print(os.getcwd())
+from u2net_load import model
+from u2net_run import infer
 os.chdir(cwd)
-os.getcwd()
+
+cwd = os.getcwd()
+os.chdir(os.getcwd() + '/ACGPN/')
+print(os.getcwd())
+from predict_pose import generate_pose_keypoints
+os.chdir(cwd)
+#from ACGPN.predict_pose import generate_pose_keypoints
+
 
 
 def obtener_u2net():
     cwd = os.getcwd()
     os.chdir(os.getcwd() + '/ACGPN/U-2-Net/')
-    u2net = u2net_load.model(model_name = 'u2netp')
+    u2net = model(model_name = 'u2netp')
     os.chdir(cwd)
     os.getcwd()
     return u2net
@@ -57,7 +65,7 @@ def preprocesar_ropa():
             cloth = Image.open(cloth_path)
             cloth = cloth.resize((192, 256), Image.BICUBIC).convert('RGB')
             cloth.save(os.path.join('/content/ACGPN/Data_preprocessing/test_color', nuevo_nombre_archivo))
-            u2net_run.infer(u2net, '/content/ACGPN/Data_preprocessing/test_color', '/content/ACGPN/Data_preprocessing/test_edge')
+            infer(u2net, '/content/ACGPN/Data_preprocessing/test_color', '/content/ACGPN/Data_preprocessing/test_edge')
 
             num_imagen += 1
 
