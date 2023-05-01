@@ -1,5 +1,10 @@
+import os
 from os import system
+cwd = os.getcwd()
+os.chdir(os.getcwd() + '/rest-api-model/')
 import preprocesar_imagenes as prepro
+os.chdir(cwd)
+os.getcwd()
 
 def guardar_resultado():
     system('cp ../ACGPN/results/test/try-on/* img/result/')
